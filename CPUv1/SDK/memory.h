@@ -2,8 +2,8 @@
 #include "data.h"
 
 struct MemoryCell {
-    NodeRef data_node;
-    NodeRef value_node;
+    NodeRef output_node;
+    NodeRef input_node;
     NodeRef update_node;
 
     MemoryCell(NodeData* node_data) {
@@ -15,15 +15,15 @@ struct MemoryCell {
         and_gate.connect_to(flipflop);
         flipflop.connect_to(xor_gate);
 
-        data_node = flipflop;
-        value_node = xor_gate;
+        output_node = flipflop;
+        input_node = xor_gate;
         update_node = and_gate;
     }
 };
 
 struct Register {
-    std::vector<NodeRef> data_nodes;
-    std::vector<NodeRef> value_nodes;
+    std::vector<NodeRef> output_nodes;
+    std::vector<NodeRef> input_nodes;
     NodeRef update_node;
 
     Register(NodeData* node_data, unsigned char size) {
@@ -34,8 +34,8 @@ struct Register {
 
             update_node.connect_to(memory_cell.update_node);
 
-            data_nodes.push_back(memory_cell.data_node);
-            value_nodes.push_back(memory_cell.value_node);
+            output_nodes.push_back(memory_cell.output_node);
+            input_nodes.push_back(memory_cell.input_node);
         }
     }
 };

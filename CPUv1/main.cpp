@@ -11,16 +11,16 @@ int main() {
         .connect_to(register1.update_node);
 
     char count = 1;
-    for (NodeRef value_node : register1.value_nodes) {
+    for (NodeRef input_node : register1.input_nodes) {
         node_data.create<FLIPFLOP>(NodePosition{ -5, 10, count })
-            .connect_to(value_node);
+            .connect_to(input_node);
 
         count++;
     }
 
     count = 1;
-    for (NodeRef data_node : register1.data_nodes) {
-        data_node.connect_to(
+    for (NodeRef output_node : register1.output_nodes) {
+        output_node.connect_to(
             node_data.create<LED>(NodePosition{ -5, 11, count })
         );
 
