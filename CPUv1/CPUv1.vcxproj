@@ -138,6 +138,8 @@
     <ClInclude Include="SDK\data.h" />
     <ClInclude Include="SDK\node.h" />
     <ClInclude Include="sdk.h" />
+    <ClInclude Include="SDK\util.h" />
+    <ClInclude Include="sdk_tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

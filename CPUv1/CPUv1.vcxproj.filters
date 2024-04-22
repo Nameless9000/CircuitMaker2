@@ -35,5 +35,11 @@
     <ClInclude Include="SDK\memory.h">
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
+    <ClInclude Include="SDK\util.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk_tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
