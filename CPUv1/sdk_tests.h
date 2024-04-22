@@ -87,7 +87,7 @@ namespace Tests {
 
         NodeData node_data = NodeData();
 
-        SRAM sram = SRAM(&node_data, 1, 8);
+        SRAM sram = SRAM(&node_data, 8, 8);
 
         char count = 0;
         for (NodeRef bit : sram.addr_decoder.input_bits) {
@@ -115,11 +115,8 @@ namespace Tests {
         }
 
         node_data.create<BUTTON>(NodePosition{ -5, 2, 0 })
-            .connect_to(sram.update_bit);
-
-        node_data.create<FLIPFLOP>(NodePosition{ -5, 2, 1 })
             .connect_to(sram.write_bit);
 
-        std::cout << node_data.compile() << std::endl << std::endl;
+        std::cout << node_data.compile(20,20) << std::endl << std::endl;
     }
 }

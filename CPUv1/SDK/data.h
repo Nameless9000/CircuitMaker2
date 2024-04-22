@@ -10,6 +10,9 @@ struct NodeData {
 		char y = 0;
 		char z = 0;
 
+		int block_count = 0;
+		int connection_count = 0;
+
 		std::string blocks = "";
 		std::string connections = "";
 
@@ -17,6 +20,8 @@ struct NodeData {
 		for (Node node : nodes) {
 			if (!blocks.empty()) blocks += ";";
 			blocks += std::to_string(node.type); // id
+
+			block_count++;
 
 			if (node.state) { // state
 				blocks += ",1";
@@ -61,10 +66,13 @@ struct NodeData {
 			for (NodeRef source_node : node.source) { // connections
 				if (!connections.empty()) connections += ";";
 				connections += std::to_string(source_node.node_id + 1) + "," + std::to_string(index + 1);
+				connection_count++;
 			}
 			
 			index++;
 		}
+
+		std::cout << "[Compile Stats] Blocks: " << block_count << " | Connections: " << connection_count << "\n\n";
 
 		return blocks + "?" + connections;
 	}

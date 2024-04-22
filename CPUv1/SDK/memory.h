@@ -41,25 +41,27 @@ struct Register {
     }
 };
 
-struct SmartRegister {
+struct AdvancedRegister {
     std::vector<NodeRef> output_bits;
     std::vector<NodeRef> input_bits;
-    NodeRef update_bit;
     NodeRef write_block;
 
-    SmartRegister(NodeData* node_data, unsigned char size = 8) {
-        update_bit = node_data->create<LED>();
-
+    AdvancedRegister(NodeData* node_data, unsigned char size = 8) {
         write_block = node_data->create<AND>();
-        update_bit.connect_to(write_block);
 
         for (unsigned char i = 0; i < size; i++) {
-            MemoryCell memory_cell = MemoryCell(node_data);
+            NodeRef flipflop = node_data->create<FLIPFLOP>();
+            NodeRef and_gate = node_data->create<AND>();
+            NodeRef xor_gate = node_data->create<XOR>();
 
-            write_block.connect_to(memory_cell.update_bit);
+            xor_gate.connect_to(and_gate);
+            and_gate.connect_to(flipflop);
+            flipflop.connect_to(xor_gate);
 
-            output_bits.push_back(memory_cell.output_bit);
-            input_bits.push_back(memory_cell.input_bit);
+            write_block.connect_to(and_gate);
+
+            output_bits.push_back(flipflop);
+            input_bits.push_back(xor_gate);
         }
     }
 };
@@ -68,12 +70,10 @@ struct SRAM {
     std::vector<NodeRef> output_bits;
     std::vector<NodeRef> input_bits;
     NodeRef write_bit;
-    NodeRef update_bit;
     Decoder addr_decoder;
 
     SRAM(NodeData* node_data, unsigned char select_bits = 2, unsigned char register_size = 8) {
         write_bit = node_data->create<LED>();
-        update_bit = node_data->create<LED>();
 
         addr_decoder = Decoder(node_data, select_bits);
 
@@ -88,21 +88,19 @@ struct SRAM {
         }
 
         for (NodeRef select_bit : addr_decoder.output_bits) {
-            SmartRegister sregister = SmartRegister(node_data, register_size);
+            AdvancedRegister aregister = AdvancedRegister(node_data, register_size);
 
-            write_bit.connect_to(sregister.write_block);
-            select_bit.connect_to(sregister.write_block);
-
-            update_bit.connect_to(sregister.update_bit);
+            write_bit.connect_to(aregister.write_block);
+            select_bit.connect_to(aregister.write_block);
 
             int count = 0;
-            for (NodeRef bit : sregister.input_bits) {
+            for (NodeRef bit : aregister.input_bits) {
                 input_bits.at(count).connect_to(bit);
                 count++;
             }
 
             count = 0;
-            for (NodeRef bit : sregister.output_bits) {
+            for (NodeRef bit : aregister.output_bits) {
                 NodeRef read_block = node_data->create<AND>();
                 
                 bit.connect_to(read_block);
