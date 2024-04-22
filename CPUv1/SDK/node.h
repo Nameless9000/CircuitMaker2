@@ -46,7 +46,7 @@ class NodeRef {
 public:
 	unsigned short node_id;
 
-	NodeRef() : nodes(0), node_id(0) {}
+	NodeRef() : nodes(0), node_id(-1) {}
 	NodeRef(std::vector<Node>* nodes_vector) {
 		nodes = nodes_vector;
 		node_id = (unsigned short)(nodes->size() - 1);

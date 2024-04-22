@@ -134,6 +134,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SDK\memory.h" />
     <ClInclude Include="SDK\data.h" />
     <ClInclude Include="SDK\node.h" />
     <ClInclude Include="sdk.h" />
