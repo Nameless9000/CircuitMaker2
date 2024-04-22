@@ -7,4 +7,6 @@ int main() {
     Tests::register_test();
 
     Tests::decoder_test();
+
+    Tests::sram_test();
 }

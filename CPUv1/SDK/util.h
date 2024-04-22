@@ -5,6 +5,7 @@ struct Decoder {
     std::vector<NodeRef> input_bits;
     std::vector<NodeRef> output_bits;
 
+    Decoder() : input_bits({}), output_bits({}) {};
 	Decoder(NodeData* node_data, unsigned char data_bits) {
         std::vector<NodeRef> nor_gates;
 
