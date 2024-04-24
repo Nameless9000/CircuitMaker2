@@ -11,12 +11,48 @@ Node* NodeRef::get() {
 	return &nodes->at(node_id);
 }
 
-NodeRef NodeRef::connect_to(NodeRef node) {
+NodeRef& NodeRef::operator>>(const NodeRef& node) {
 	if (node.nodes == nullptr)
 		throw std::invalid_argument("node is invalid");
 
+	NodeRef node_copy = node;
 	get()->destination.push_back(node);
-	node.get()->source.push_back(*this);
+	node_copy.get()->source.push_back(*this);
+
+	return node_copy;
+}
+
+NodeRef& NodeRef::operator>>(const NodeVec& nodes) {
+	for (NodeRef node : nodes) {
+		if (node.nodes == nullptr)
+			throw std::invalid_argument("node is invalid");
+
+		get()->destination.push_back(node);
+		node.get()->source.push_back(*this);
+	}
+	
+	return *this;
+}
+
+NodeRef& NodeRef::operator<<(const NodeRef& node) {
+	if (node.nodes == nullptr)
+		throw std::invalid_argument("node is invalid");
+
+	NodeRef node_copy = node;
+	get()->source.push_back(node);
+	node_copy.get()->destination.push_back(*this);
+
+	return node_copy;
+}
+
+NodeRef& NodeRef::operator<<(const NodeVec& nodes) {
+	for (NodeRef node : nodes) {
+		if (node.nodes == nullptr)
+			throw std::invalid_argument("node is invalid");
+
+		get()->source.push_back(node);
+		node.get()->destination.push_back(*this);
+	}
 
 	return *this;
 }

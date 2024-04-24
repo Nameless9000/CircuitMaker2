@@ -13,15 +13,15 @@ namespace Memory {
     };
 
     struct Register {
-        std::vector<NodeRef> output_bits;
-        std::vector<NodeRef> input_bits;
+        NodeVec output_bits;
+        NodeVec input_bits;
         NodeRef update_bit;
 
         Register(NodeData* node_data, unsigned char size = 8);
     };
 
     struct ShiftRegister {
-        std::vector<NodeRef> output_bits;
+        NodeVec output_bits;
         NodeRef input_bit;
         NodeRef update_bit;
 
@@ -29,8 +29,8 @@ namespace Memory {
     };
 
     struct SRAM {
-        std::vector<NodeRef> output_bits;
-        std::vector<NodeRef> input_bits;
+        NodeVec output_bits;
+        NodeVec input_bits;
         NodeRef write_bit;
         Plexers::Decoder addr_decoder;
 

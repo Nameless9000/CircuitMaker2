@@ -8,9 +8,9 @@ MemoryCell::MemoryCell(NodeData* node_data) {
     NodeRef and_gate = node_data->create<AND>();
     NodeRef xor_gate = node_data->create<XOR>();
 
-    xor_gate.connect_to(and_gate);
-    and_gate.connect_to(flipflop);
-    flipflop.connect_to(xor_gate);
+    xor_gate >> and_gate;
+    and_gate >> flipflop;
+    flipflop >> xor_gate;
 
     output_bit = flipflop;
     input_bit = xor_gate;
@@ -23,7 +23,7 @@ Register::Register(NodeData* node_data, unsigned char size) {
     for (unsigned char i = 0; i < size; i++) {
         MemoryCell memory_cell = MemoryCell(node_data);
 
-        update_bit.connect_to(memory_cell.update_bit);
+        update_bit >> memory_cell.update_bit;
 
         output_bits.push_back(memory_cell.output_bit);
         input_bits.push_back(memory_cell.input_bit);
@@ -37,14 +37,14 @@ ShiftRegister::ShiftRegister(NodeData* node_data, unsigned char bits, bool shoul
     for (unsigned char count = 0; count < bits; count++) {
         MemoryCell memory_cell = MemoryCell(node_data);
 
-        output_bits.push_back(memory_cell.output_bit);
-        update_bit.connect_to(memory_cell.update_bit);
+        update_bit >> memory_cell.update_bit;
 
         if (count == 0)
             input_bit = memory_cell.input_bit;
         else 
-            last_cell.output_bit.connect_to(memory_cell.input_bit);
+            last_cell.output_bit >> memory_cell.input_bit;
             
+        output_bits.push_back(memory_cell.output_bit);
 
         last_cell = memory_cell;
     }
@@ -68,12 +68,12 @@ SRAM::SRAM(NodeData* node_data, unsigned char select_bits, unsigned char registe
     for (NodeRef select_bit : addr_decoder.output_bits) {
         Register data_register = Register(node_data, register_size);
 
-        write_bit.connect_to(data_register.update_bit);
-        select_bit.connect_to(data_register.update_bit);
+        write_bit >> data_register.update_bit;
+        select_bit >> data_register.update_bit;
 
         int count = 0;
         for (NodeRef bit : data_register.input_bits) {
-            input_bits.at(count).connect_to(bit);
+            input_bits.at(count) >> bit;
             count++;
         }
 
@@ -81,10 +81,10 @@ SRAM::SRAM(NodeData* node_data, unsigned char select_bits, unsigned char registe
         for (NodeRef bit : data_register.output_bits) {
             NodeRef read_block = node_data->create<AND>();
 
-            bit.connect_to(read_block);
-            select_bit.connect_to(read_block);
+            read_block 
+                << NodeVec{bit, select_bit}
+                >> output_bits.at(count);
 
-            read_block.connect_to(output_bits.at(count));
             count++;
         }
     }

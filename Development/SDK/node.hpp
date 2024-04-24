@@ -29,6 +29,7 @@ struct NodePosition {
 };
 
 struct NodeRef;
+typedef std::vector<NodeRef> NodeVec;
 
 struct Node {
 	NodeTypes type;
@@ -37,8 +38,8 @@ struct Node {
 
 	std::vector<short> properties;
 
-	std::vector<NodeRef> source;
-	std::vector<NodeRef> destination;
+	NodeVec source;
+	NodeVec destination;
 };
 
 struct NodeRef {
@@ -49,5 +50,9 @@ struct NodeRef {
 	NodeRef(std::vector<Node>* nodes_vector);
 
 	Node* get();
-	NodeRef connect_to(NodeRef node);
+
+	NodeRef& operator<<(const NodeRef& node);
+	NodeRef& operator<<(const NodeVec& nodes);
+	NodeRef& operator>>(const NodeRef& node);
+	NodeRef& operator>>(const NodeVec& nodes);
 };

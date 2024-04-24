@@ -11,15 +11,14 @@ void Tests::memory_cell_test() {
 
     Memory::MemoryCell memory_cell = Memory::MemoryCell(&node_data);
 
-    node_data.create<FLIPFLOP>(NodePosition{ 1, 5, 0 })
-        .connect_to(memory_cell.input_bit);
+    memory_cell.input_bit
+        << node_data.create<FLIPFLOP>(NodePosition{ 1, 5, 0 });
 
-    memory_cell.output_bit.connect_to(
-        node_data.create<LED>(NodePosition{ 2, 5, 0 })
-    );
+    memory_cell.output_bit
+        >> node_data.create<LED>(NodePosition{ 2, 5, 0 });
 
-    node_data.create<BUTTON>(NodePosition{ 3, 5, 0 })
-        .connect_to(memory_cell.update_bit);
+    memory_cell.update_bit
+        << node_data.create<BUTTON>(NodePosition{ 3, 5, 0 });
 
     std::cout << node_data.compile() << std::endl << std::endl;
 }
@@ -32,22 +31,19 @@ void Tests::register_test() {
     unsigned char register_size = 16;
     Memory::Register register1 = Memory::Register(&node_data, register_size);
 
-    node_data.create<BUTTON>(NodePosition{ -5, 5, 0 })
-        .connect_to(register1.update_bit);
+    register1.update_bit
+        << node_data.create<BUTTON>(NodePosition{ -5, 5, 0 });
 
     char count = 1;
     for (NodeRef bit : register1.input_bits) {
-        node_data.create<FLIPFLOP>(NodePosition{ -5, 5, count })
-            .connect_to(bit);
+        bit << node_data.create<FLIPFLOP>(NodePosition{ -5, 5, count });
 
         count++;
     }
 
     count = 1;
     for (NodeRef bit : register1.output_bits) {
-        bit.connect_to(
-            node_data.create<LED>(NodePosition{ -5, 6, count })
-        );
+        bit >> node_data.create<LED>(NodePosition{ -5, 6, count });
 
         count++;
     }
@@ -62,16 +58,15 @@ void Tests::shift_register_test() {
 
     Memory::ShiftRegister sregister = Memory::ShiftRegister(&node_data, 4);
 
-    node_data.create<BUTTON>(NodePosition{ -5, 5, 0 })
-        .connect_to(sregister.update_bit);
-    node_data.create<FLIPFLOP>(NodePosition{ -5, 5, 1 })
-        .connect_to(sregister.input_bit);
+    sregister.update_bit
+        << node_data.create<BUTTON>(NodePosition{ -5, 5, 0 });
+
+    sregister.input_bit
+        << node_data.create<FLIPFLOP>(NodePosition{ -5, 5, 1 });
 
     char count = 1;
     for (NodeRef bit : sregister.output_bits) {
-        bit.connect_to(
-            node_data.create<LED>(NodePosition{ -5, 6, count })
-        );
+        bit >> node_data.create<LED>(NodePosition{ -5, 6, count });
 
         count++;
     }
@@ -89,17 +84,14 @@ void Tests::decoder_test() {
 
     char count = 0;
     for (NodeRef bit : decoder.input_bits) {
-        node_data.create<FLIPFLOP>(NodePosition{ -5, 5, count })
-            .connect_to(bit);
+        bit << node_data.create<FLIPFLOP>(NodePosition{ -5, 5, count });
 
         count++;
     }
 
     count = 0;
     for (NodeRef bit : decoder.output_bits) {
-        bit.connect_to(
-            node_data.create<LED>(NodePosition{ -5, 6, count })
-        );
+        bit >> node_data.create<LED>(NodePosition{ -5, 6, count });
 
         count++;
     }
@@ -116,31 +108,27 @@ void Tests::sram_test() {
 
     char count = 0;
     for (NodeRef bit : sram.addr_decoder.input_bits) {
-        node_data.create<FLIPFLOP>(NodePosition{ -5, 5, count })
-            .connect_to(bit);
+        bit << node_data.create<FLIPFLOP>(NodePosition{ -5, 5, count });
 
         count++;
     }
 
     count = 0;
     for (NodeRef bit : sram.input_bits) {
-        node_data.create<FLIPFLOP>(NodePosition{ -5, 4, count })
-            .connect_to(bit);
+        node_data.create<FLIPFLOP>(NodePosition{ -5, 4, count }) >> bit;
 
         count++;
     }
 
     count = 0;
     for (NodeRef bit : sram.output_bits) {
-        bit.connect_to(
-            node_data.create<LED>(NodePosition{ -5, 3, count })
-        );
+        bit >> node_data.create<LED>(NodePosition{ -5, 3, count });
 
         count++;
     }
 
-    node_data.create<BUTTON>(NodePosition{ -5, 2, 0 })
-        .connect_to(sram.write_bit);
+    sram.write_bit
+        << node_data.create<BUTTON>(NodePosition{ -5, 2, 0 });
 
     std::cout << node_data.compile() << std::endl << std::endl;
 }
