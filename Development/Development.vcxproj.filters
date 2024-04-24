@@ -9,36 +9,50 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Header Files\SDK">
       <UniqueIdentifier>{0fc2f33f-45df-4639-9654-6d731d0b9c75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SDK">
+      <UniqueIdentifier>{8fdeac47-85b7-4bbd-bdda-237f99cb71bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SDK\data.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\memory.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\plexers.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\node.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SDK\node.h">
+    <ClInclude Include="SDK\node.hpp">
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
-    <ClInclude Include="sdk.h">
+    <ClInclude Include="sdk.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\data.h">
+    <ClInclude Include="SDK\data.hpp">
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\memory.h">
+    <ClInclude Include="SDK\memory.hpp">
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\util.h">
+    <ClInclude Include="SDK\plexers.hpp">
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
-    <ClInclude Include="sdk_tests.h">
+    <ClInclude Include="sdk_tests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

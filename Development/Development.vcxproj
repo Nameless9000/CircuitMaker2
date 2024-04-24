@@ -22,8 +22,9 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{269d1ca5-53b4-46e8-b766-7705e33fd8f1}</ProjectGuid>
-    <RootNamespace>CPUv1</RootNamespace>
+    <RootNamespace>Development</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Development</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -110,6 +111,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,18 +130,24 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SDK\data.cpp" />
+    <ClCompile Include="SDK\memory.cpp" />
+    <ClCompile Include="SDK\node.cpp" />
+    <ClCompile Include="SDK\plexers.cpp" />
+    <ClCompile Include="sdk_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SDK\memory.h" />
-    <ClInclude Include="SDK\data.h" />
-    <ClInclude Include="SDK\node.h" />
-    <ClInclude Include="sdk.h" />
-    <ClInclude Include="SDK\util.h" />
-    <ClInclude Include="sdk_tests.h" />
+    <ClInclude Include="SDK\memory.hpp" />
+    <ClInclude Include="SDK\data.hpp" />
+    <ClInclude Include="SDK\node.hpp" />
+    <ClInclude Include="sdk.hpp" />
+    <ClInclude Include="SDK\plexers.hpp" />
+    <ClInclude Include="sdk_tests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

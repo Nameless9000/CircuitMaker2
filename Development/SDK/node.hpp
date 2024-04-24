@@ -28,7 +28,7 @@ struct NodePosition {
 	char z;
 };
 
-class NodeRef;
+struct NodeRef;
 
 struct Node {
 	NodeTypes type;
@@ -41,23 +41,13 @@ struct Node {
 	std::vector<NodeRef> destination;
 };
 
-class NodeRef {
+struct NodeRef {
 	std::vector<Node>* nodes;
-public:
 	unsigned short node_id;
 
-	NodeRef() : nodes(0), node_id(-1) {}
-	NodeRef(std::vector<Node>* nodes_vector) {
-		nodes = nodes_vector;
-		node_id = (unsigned short)(nodes->size() - 1);
-	}
+	NodeRef();
+	NodeRef(std::vector<Node>* nodes_vector);
 
-	Node* get() {
-		return &nodes->at(node_id);
-	}
-
-	void connect_to(NodeRef node) {
-		get()->destination.push_back(node);
-		node.get()->source.push_back(*this);
-	}
+	Node* get();
+	NodeRef connect_to(NodeRef node);
 };
