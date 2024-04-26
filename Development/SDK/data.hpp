@@ -8,5 +8,5 @@ struct NodeData {
 	std::string compile(char max_x = 5, char max_z = 5);
 
 	template <NodeTypes T>
-	NodeRef create(NodePosition position = { -1,-1,-1 }, bool state = false, std::vector<short> properties = {});
+	NodeRef create(NodePosition position = {}, bool dont_optimize = false, bool state = false, std::vector<short> properties = {});
 };

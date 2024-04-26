@@ -33,7 +33,8 @@ To create a connection you can use `>>` or `<<` for example:
 NodeData node_data = NodeData();
 
 // create an LED block
-NodeRef led = node_data.create<AND>();
+// the ({}, true) sets the position to automatic and disables optimization
+NodeRef led = node_data.create<AND>({}, true);
 // create a BUTTON block
 NodeRef button = node_data.create<BUTTON>();
 
@@ -75,7 +76,7 @@ memory_cell.input_bit
   << node_data.create<FLIPFLOP>(NodePosition{ 1, 5, 0 });
 
 memory_cell.output_bit
-  >> node_data.create<LED>(NodePosition{ 2, 5, 0 });
+  >> node_data.create<LED>(NodePosition{ 2, 5, 0 }, true);
 
 memory_cell.update_bit
   << node_data.create<BUTTON>(NodePosition{ 3, 5, 0 });

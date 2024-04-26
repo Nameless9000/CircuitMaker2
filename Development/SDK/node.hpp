@@ -23,9 +23,9 @@ enum NodeTypes {
 };
 
 struct NodePosition {
-	char x;
-	char y;
-	char z;
+	char x = -1;
+	char y = -1;
+	char z = -1;
 };
 
 struct NodeRef;
@@ -40,6 +40,8 @@ struct Node {
 
 	NodeVec source;
 	NodeVec destination;
+	
+	bool dont_optimize;
 };
 
 struct NodeRef {

@@ -4,6 +4,56 @@
 
 using namespace Tests;
 
+void Tests::seven_segment_decimal_test() {
+    std::cout << "#### SEVEN SEGMENT DECIMAL TEST ####" << std::endl;
+
+    NodeData node_data = NodeData();
+
+    Display::SevenSegmentDecimal display = Display::SevenSegmentDecimal(&node_data);
+
+    for (char i = 0; i < 9; i++) {
+        node_data.create<FLIPFLOP>(NodePosition{ i, 0, -1 }) >> display.bits[i];
+    }
+
+    display.a >> NodeVec{
+        node_data.create<LED>(NodePosition{ 0, 12, 1 }, true),
+        node_data.create<LED>(NodePosition{ 0, 12, 2 }, true),
+        node_data.create<LED>(NodePosition{ 0, 12, 3 }, true)
+    };
+    display.b >> NodeVec{
+        node_data.create<LED>(NodePosition{ 0, 9, 4 }, true),
+        node_data.create<LED>(NodePosition{ 0, 10, 4 }, true),
+        node_data.create<LED>(NodePosition{ 0, 11, 4 }, true)
+    };
+    display.c >> NodeVec{
+        node_data.create<LED>(NodePosition{ 0, 5, 4 }, true),
+        node_data.create<LED>(NodePosition{ 0, 6, 4 }, true),
+        node_data.create<LED>(NodePosition{ 0, 7, 4 }, true)
+    };
+    display.d >> NodeVec{
+        node_data.create<LED>(NodePosition{ 0, 4, 1 }, true),
+        node_data.create<LED>(NodePosition{ 0, 4, 2 }, true),
+        node_data.create<LED>(NodePosition{ 0, 4, 3 }, true)
+    };
+    display.e >> NodeVec{
+        node_data.create<LED>(NodePosition{ 0, 5, 0 }, true),
+        node_data.create<LED>(NodePosition{ 0, 6, 0 }, true),
+        node_data.create<LED>(NodePosition{ 0, 7, 0 }, true),
+    };
+    display.f >> NodeVec{
+        node_data.create<LED>(NodePosition{ 0, 9, 0 }, true),
+        node_data.create<LED>(NodePosition{ 0, 10, 0 }, true),
+        node_data.create<LED>(NodePosition{ 0, 11, 0 }, true)
+    };
+    display.g >> NodeVec{
+        node_data.create<LED>(NodePosition{ 0, 8, 1 }, true),
+        node_data.create<LED>(NodePosition{ 0, 8, 2 }, true),
+        node_data.create<LED>(NodePosition{ 0, 8, 3 }, true)
+    };
+
+    std::cout << node_data.compile() << std::endl << std::endl;
+}
+
 void Tests::memory_cell_test() {
     std::cout << "#### MEMORY CELL TEST ####" << std::endl;
 
@@ -15,7 +65,7 @@ void Tests::memory_cell_test() {
         << node_data.create<FLIPFLOP>(NodePosition{ 1, 5, 0 });
 
     memory_cell.output_bit
-        >> node_data.create<LED>(NodePosition{ 2, 5, 0 });
+        >> node_data.create<LED>(NodePosition{ 2, 5, 0 }, true);
 
     memory_cell.update_bit
         << node_data.create<BUTTON>(NodePosition{ 3, 5, 0 });
@@ -43,7 +93,7 @@ void Tests::register_test() {
 
     count = 1;
     for (NodeRef bit : register1.output_bits) {
-        bit >> node_data.create<LED>(NodePosition{ -5, 6, count });
+        bit >> node_data.create<LED>(NodePosition{ -5, 6, count }, true);
 
         count++;
     }
@@ -66,7 +116,7 @@ void Tests::shift_register_test() {
 
     char count = 1;
     for (NodeRef bit : sregister.output_bits) {
-        bit >> node_data.create<LED>(NodePosition{ -5, 6, count });
+        bit >> node_data.create<LED>(NodePosition{ -5, 6, count }, true);
 
         count++;
     }
@@ -91,7 +141,7 @@ void Tests::decoder_test() {
 
     count = 0;
     for (NodeRef bit : decoder.output_bits) {
-        bit >> node_data.create<LED>(NodePosition{ -5, 6, count });
+        bit >> node_data.create<LED>(NodePosition{ -5, 6, count }, true);
 
         count++;
     }
@@ -122,7 +172,7 @@ void Tests::sram_test() {
 
     count = 0;
     for (NodeRef bit : sram.output_bits) {
-        bit >> node_data.create<LED>(NodePosition{ -5, 3, count });
+        bit >> node_data.create<LED>(NodePosition{ -5, 3, count }, true);
 
         count++;
     }

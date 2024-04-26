@@ -8,7 +8,8 @@ int main() {
         Tests::register_test,
         Tests::decoder_test,
         Tests::sram_test,
-        Tests::shift_register_test
+        Tests::shift_register_test,
+        Tests::seven_segment_decimal_test
     }) {
         auto start = std::chrono::high_resolution_clock::now();
 

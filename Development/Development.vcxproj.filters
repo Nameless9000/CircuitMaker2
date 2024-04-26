@@ -35,6 +35,9 @@
     <ClCompile Include="SDK\node.cpp">
       <Filter>Source Files\SDK</Filter>
     </ClCompile>
+    <ClCompile Include="SDK\display.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\node.hpp">
@@ -54,6 +57,9 @@
     </ClInclude>
     <ClInclude Include="sdk_tests.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\display.hpp">
+      <Filter>Header Files\SDK</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

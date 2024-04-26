@@ -1,7 +1,77 @@
 #include <iostream>
 #include "data.hpp"
 
+static bool contains_loop(NodeVec from, NodeVec to) {
+	for (NodeRef node1 : from) {
+		for (NodeRef node2 : to) {
+			if (node1.node_id == node2.node_id)
+				return true;
+		}
+	}
+
+	return false;
+}
+
+static NodeData preprocess_data(NodeData* input) {
+	NodeData new_data = NodeData();
+
+	for (Node node : input->nodes) {
+		if (node.dont_optimize || contains_loop(node.source, node.destination)) {
+			new_data.nodes.push_back(node);
+			continue;
+		}
+		
+		if (
+			node.source.size() == 0 && (
+				node.type != FLIPFLOP &&
+				node.type != BUTTON &&
+				node.type != ANTENNA &&
+				node.type != RANDOM
+				) ||
+			node.destination.size() == 0 && (
+				node.type != LED &&
+				node.type != SOUND
+				)
+			)
+			continue;
+
+		switch (node.type) {
+			case NODE:
+			case CUSTOM:
+			case TILE:
+			case TEXT:
+			case LED:
+			case OR:
+				if (node.source.size() == 1) {
+					for (NodeRef dnode : node.destination) {
+						node.source.front() >> dnode;
+					}
+					continue;
+				} else if (node.destination.size() == 1) {
+					for (NodeRef snode : node.source) {
+						node.destination.front() << snode;
+					}
+					continue;
+				}
+				[[fallthrough]];
+			case AND:
+			case XOR:
+			case BUTTON:
+				if (node.source.size() == 1 && node.destination.size() == 1) {
+					node.source.front() >> node.destination.front();
+					continue;
+				}
+		}
+
+		new_data.nodes.push_back(node);
+	}
+
+	return new_data;
+}
+
 std::string NodeData::compile(char max_x, char max_z) {
+	NodeData processed_data = preprocess_data(this);
+
 	char x = 0;
 	char y = 0;
 	char z = 0;
@@ -13,7 +83,7 @@ std::string NodeData::compile(char max_x, char max_z) {
 	std::string connections = "";
 
 	unsigned short index = 0;
-	for (Node node : nodes) {
+	for (Node node : processed_data.nodes) {
 		if (!blocks.empty()) blocks += ";";
 		blocks += std::to_string(node.type); // id
 
@@ -75,11 +145,11 @@ std::string NodeData::compile(char max_x, char max_z) {
 	return save_string;
 }
 
-#define INSTANTIATE_CREATE(T) template NodeRef NodeData::create<T>(NodePosition, bool, std::vector<short>)
+#define INSTANTIATE_CREATE(T) template NodeRef NodeData::create<T>(NodePosition, bool, bool, std::vector<short>)
 
 template <NodeTypes T>
-NodeRef NodeData::create(NodePosition position, bool state, std::vector<short> properties) {
-	nodes.push_back({ T, state, position, properties, {}, {} });
+NodeRef NodeData::create(NodePosition position, bool dont_optimize, bool state, std::vector<short> properties) {
+	nodes.push_back({ T, state, position, properties, {}, {}, dont_optimize });
 	return NodeRef(&nodes);
 };
 
