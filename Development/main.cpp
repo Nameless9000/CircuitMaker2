@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include "sdk_tests.hpp"
+#include "SDK/data.hpp"
 
 int main() {
     for (auto test : {
@@ -13,7 +14,8 @@ int main() {
     }) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        test();
+        NodeData node_data = test();
+        std::string save_string = node_data.compile();
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = duration_cast<std::chrono::microseconds>(stop - start);
@@ -21,6 +23,8 @@ int main() {
             << "Time taken: "
             << duration.count()
             << " microseconds"
-            << std::endl;
+            << std::endl << std::endl;
+
+        std::cout << save_string << std::endl << std::endl;
     }
 }

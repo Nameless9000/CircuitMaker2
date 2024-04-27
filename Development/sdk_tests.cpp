@@ -4,7 +4,7 @@
 
 using namespace Tests;
 
-void Tests::seven_segment_decimal_test() {
+NodeData Tests::seven_segment_decimal_test() {
     std::cout << "#### SEVEN SEGMENT DECIMAL TEST ####" << std::endl;
 
     NodeData node_data = NodeData();
@@ -51,10 +51,10 @@ void Tests::seven_segment_decimal_test() {
         node_data.create<LED>(NodePosition{ 0, 8, 3 }, true)
     };
 
-    std::cout << node_data.compile() << std::endl << std::endl;
+    return node_data;
 }
 
-void Tests::memory_cell_test() {
+NodeData Tests::memory_cell_test() {
     std::cout << "#### MEMORY CELL TEST ####" << std::endl;
 
     NodeData node_data = NodeData();
@@ -70,10 +70,10 @@ void Tests::memory_cell_test() {
     memory_cell.update_bit
         << node_data.create<BUTTON>(NodePosition{ 3, 5, 0 });
 
-    std::cout << node_data.compile() << std::endl << std::endl;
+    return node_data;
 }
 
-void Tests::register_test() {
+NodeData Tests::register_test() {
     std::cout << "#### REGISTER TEST ####" << std::endl;
 
     NodeData node_data = NodeData();
@@ -98,10 +98,10 @@ void Tests::register_test() {
         count++;
     }
 
-    std::cout << node_data.compile() << std::endl << std::endl;
+    return node_data;
 }
 
-void Tests::shift_register_test() {
+NodeData Tests::shift_register_test() {
     std::cout << "#### SHIFT REGISTER TEST ####" << std::endl;
 
     NodeData node_data = NodeData();
@@ -121,10 +121,10 @@ void Tests::shift_register_test() {
         count++;
     }
 
-    std::cout << node_data.compile() << std::endl << std::endl;
+    return node_data;
 }
 
-void Tests::decoder_test() {
+NodeData Tests::decoder_test() {
     std::cout << "#### DECODER TEST ####" << std::endl;
 
     NodeData node_data = NodeData();
@@ -146,10 +146,10 @@ void Tests::decoder_test() {
         count++;
     }
 
-    std::cout << node_data.compile() << std::endl << std::endl;
+    return node_data;
 }
 
-void Tests::sram_test() {
+NodeData Tests::sram_test() {
     std::cout << "#### SRAM TEST ####" << std::endl;
 
     NodeData node_data = NodeData();
@@ -180,5 +180,5 @@ void Tests::sram_test() {
     sram.write_bit
         << node_data.create<BUTTON>(NodePosition{ -5, 2, 0 });
 
-    std::cout << node_data.compile() << std::endl << std::endl;
+    return node_data;
 }

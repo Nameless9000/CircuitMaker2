@@ -1,10 +1,11 @@
 #pragma once
+#include "SDK/data.hpp";
 
 namespace Tests {
-    void seven_segment_decimal_test();
-    void memory_cell_test();
-    void register_test();
-    void shift_register_test();
-    void decoder_test();
-    void sram_test();
+    NodeData seven_segment_decimal_test();
+    NodeData memory_cell_test();
+    NodeData register_test();
+    NodeData shift_register_test();
+    NodeData decoder_test();
+    NodeData sram_test();
 }

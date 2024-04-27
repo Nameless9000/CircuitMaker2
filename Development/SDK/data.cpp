@@ -79,7 +79,7 @@ static NodeData preprocess_data(NodeData* input) {
 	return new_data;
 }
 
-std::string NodeData::compile(char max_x, char max_z) {
+std::string NodeData::compile(bool compile_for_speed, char max_x, char max_z) {
 	NodeData processed_data = preprocess_data(this);
 
 	char x = 0;
@@ -93,6 +93,15 @@ std::string NodeData::compile(char max_x, char max_z) {
 
 	for (Node node : processed_data.nodes) {
 		if (!blocks.empty()) blocks += ";";
+
+		if (compile_for_speed) {
+			switch (node.type)
+			{
+			case OR:
+			case LED:
+				node.type = NODE;
+			}
+		}
 		blocks += std::to_string(node.type); // id
 
 		block_count++;
@@ -163,7 +172,9 @@ std::string NodeData::compile(char max_x, char max_z) {
 
 	std::string save_string = blocks + "?" + connections;
 
-	std::cout << "[Compile Stats] Raw: " << save_string.length() << " | Blocks: " << block_count << " (" << blocks.length() << ") | Connections: " << connection_count << " (" << connections.length() << ")\n\n";
+	std::cout
+		<< "[Compile Stats] Raw: " << save_string.length() << " | Blocks: " << block_count << " (" << blocks.length() << ") | Connections: " << connection_count << " (" << connections.length() << ")"
+		<< std::endl;
 
 	return save_string;
 }
