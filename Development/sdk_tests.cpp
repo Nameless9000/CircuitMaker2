@@ -212,8 +212,10 @@ NodeData Tests::full_adder_test()
         count++;
     }
 
-    adder.carry_bit
+    adder.carry_bit_out
         >> node_data.create<LED>(NodePosition{ -5, 3, count }, true);
+    adder.carry_bit_in
+        << node_data.create<FLIPFLOP>(NodePosition{ -5, 2, -1 }, true);
 
     return node_data;
 }

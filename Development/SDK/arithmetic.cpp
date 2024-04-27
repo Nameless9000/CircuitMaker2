@@ -15,20 +15,20 @@ Arithmetic::FullAdder::FullAdder(NodeData* node_data, unsigned char bits) {
 		input_bits1.push_back(input1);
 		NodeRef input2 = node_data->create<LED>();
 		input_bits2.push_back(input2);
-		NodeRef carry_buf = node_data->create<LED>();
+		NodeRef carry_buf = node_data->create<LED>({}, true);
 
 		input1 >> NodeVec{ xor_gate, and_gate2 };
 		input2 >> NodeVec{ xor_gate, and_gate2 };
 
-		if (carry_bit.nodes != nullptr)
-			carry_bit >> carry_buf;
+		if (carry_bit_out.nodes != nullptr)
+			carry_bit_out >> carry_buf;
 
 		carry_buf >> NodeVec{ output, and_gate1 };
+		if (carry_bit_in.nodes == nullptr)
+			carry_bit_in = carry_buf;
 		xor_gate >> NodeVec{ output, and_gate1 };
 
-		and_gate2 >> and_gate1;
-
 		carry << NodeVec{ and_gate1, and_gate2 };
-		carry_bit = carry;
+		carry_bit_out = carry;
 	}
 }
