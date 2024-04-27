@@ -1,5 +1,5 @@
 #pragma once
-#include "SDK/data.hpp";
+#include "SDK/data.hpp"
 
 namespace Tests {
     NodeData seven_segment_decimal_test();
