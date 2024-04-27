@@ -19,7 +19,8 @@ enum NodeTypes {
 	TILE,
 	NODE,
 	DELAY,
-	ANTENNA
+	ANTENNA,
+	CONDUCTORV2
 };
 
 struct NodePosition {
