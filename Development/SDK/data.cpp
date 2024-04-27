@@ -18,6 +18,14 @@ static bool compare_connections(Node n1, Node n2) {
 	return (n1.destination.size() + n1.source.size()) > (n2.destination.size() + n2.source.size());
 }
 
+template <typename T>
+static std::string to_string_nozero(T number) {
+	if (number == 0)
+		return "";
+
+	return std::to_string(number);
+}
+
 static NodeData preprocess_data(NodeData* input) {
 	NodeData new_data = NodeData();
 
@@ -115,9 +123,9 @@ std::string NodeData::compile(bool compile_for_speed, char max_x, char max_z) {
 
 		blocks += ",";
 		if (node.position.x == -1 && node.position.y == -1 && node.position.z == -1) { // position
-			blocks += std::to_string(x) + ",";
-			blocks += std::to_string(y) + ",";
-			blocks += std::to_string(z);
+			blocks += to_string_nozero(x) + ",";
+			blocks += to_string_nozero(y) + ",";
+			blocks += to_string_nozero(z);
 
 			x++;
 			if (x == max_x) {
@@ -130,9 +138,9 @@ std::string NodeData::compile(bool compile_for_speed, char max_x, char max_z) {
 			}
 		}
 		else {
-			blocks += std::to_string(node.position.x) + ",";
-			blocks += std::to_string(node.position.y) + ",";
-			blocks += std::to_string(node.position.z);
+			blocks += to_string_nozero(node.position.x) + ",";
+			blocks += to_string_nozero(node.position.y) + ",";
+			blocks += to_string_nozero(node.position.z);
 		}
 
 		// properties
@@ -163,7 +171,7 @@ std::string NodeData::compile(bool compile_for_speed, char max_x, char max_z) {
 
 			if (!connections.empty()) connections += ";";
 
-			connections += std::to_string(index) + "," + std::to_string(destination);
+			connections += to_string_nozero(index) + "," + to_string_nozero(destination);
 			connection_count++;
 		}
 
