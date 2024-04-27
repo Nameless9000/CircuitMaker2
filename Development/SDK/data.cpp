@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map> 
 #include "data.hpp"
 
 static bool contains_loop(NodeVec from, NodeVec to) {
@@ -17,8 +18,7 @@ static NodeData preprocess_data(NodeData* input) {
 
 	for (Node node : input->nodes) {
 		if (node.dont_optimize || contains_loop(node.source, node.destination)) {
-			new_data.nodes.push_back(node);
-			continue;
+			goto ADD_NODE;
 		}
 		
 		if (
@@ -63,6 +63,8 @@ static NodeData preprocess_data(NodeData* input) {
 				}
 		}
 
+	ADD_NODE:
+
 		new_data.nodes.push_back(node);
 	}
 
@@ -82,7 +84,8 @@ std::string NodeData::compile(char max_x, char max_z) {
 	std::string blocks = "";
 	std::string connections = "";
 
-	unsigned short index = 0;
+	std::map<unsigned short, unsigned short> node_id_substitution;
+
 	for (Node node : processed_data.nodes) {
 		if (!blocks.empty()) blocks += ";";
 		blocks += std::to_string(node.type); // id
@@ -129,9 +132,21 @@ std::string NodeData::compile(char max_x, char max_z) {
 
 		blocks += properties;
 
-		for (NodeRef source_node : node.source) { // connections
+		// map the new node_id
+		node_id_substitution[node.node_id] = block_count;
+	}
+
+	// handle connections
+	unsigned short index = 1;
+	for (Node node : processed_data.nodes) {
+		for (NodeRef destination_node : node.destination) {
+			unsigned short destination = node_id_substitution[destination_node.node_id];
+			if (destination == NULL)
+				continue;
+
 			if (!connections.empty()) connections += ";";
-			connections += std::to_string(source_node.node_id + 1) + "," + std::to_string(index + 1);
+
+			connections += std::to_string(index) + "," + std::to_string(destination);
 			connection_count++;
 		}
 

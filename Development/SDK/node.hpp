@@ -42,6 +42,7 @@ struct Node {
 	NodeVec destination;
 	
 	bool dont_optimize;
+	unsigned short node_id;
 };
 
 struct NodeRef {

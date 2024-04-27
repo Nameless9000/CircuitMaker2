@@ -5,6 +5,8 @@ NodeRef::NodeRef() : nodes(0), node_id(-1) {}
 NodeRef::NodeRef(std::vector<Node>* nodes_vector) {
 	nodes = nodes_vector;
 	node_id = (unsigned short)(nodes->size() - 1);
+
+	nodes->back().node_id = node_id; // make a copy for compilation
 }
 
 Node* NodeRef::get() {
