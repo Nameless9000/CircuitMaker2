@@ -11,7 +11,8 @@ int main() {
         Tests::sram_test,
         Tests::shift_register_test,
         Tests::seven_segment_decimal_test,
-        Tests::full_adder_test
+        Tests::full_adder_test,
+        Tests::text_generation_test
     }) {
         auto start = std::chrono::high_resolution_clock::now();
 

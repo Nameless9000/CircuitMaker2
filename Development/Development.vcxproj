@@ -138,6 +138,7 @@
     <ClCompile Include="SDK\arithmetic.cpp" />
     <ClCompile Include="SDK\data.cpp" />
     <ClCompile Include="SDK\display.cpp" />
+    <ClCompile Include="SDK\fun.cpp" />
     <ClCompile Include="SDK\memory.cpp" />
     <ClCompile Include="SDK\node.cpp" />
     <ClCompile Include="SDK\plexers.cpp" />

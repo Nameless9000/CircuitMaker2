@@ -6,3 +6,4 @@
 #include "SDK/memory.hpp"
 #include "SDK/display.hpp"
 #include "SDK/arithmetic.hpp"
+#include "SDK/fun.hpp"

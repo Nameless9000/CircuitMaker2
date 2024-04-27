@@ -9,4 +9,5 @@ namespace Tests {
     NodeData decoder_test();
     NodeData sram_test();
     NodeData full_adder_test();
+    NodeData text_generation_test();
 }

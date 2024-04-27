@@ -219,3 +219,14 @@ NodeData Tests::full_adder_test()
 
     return node_data;
 }
+
+NodeData Tests::text_generation_test()
+{
+    std::cout << "#### TEXT GENERATION TEST ####" << std::endl;
+
+    NodeData node_data = NodeData();
+
+    Fun::generate_text(&node_data, "Written in C++!\n\nThis is a test AAAAAAAA AAAAAAAA.", true, 15);
+
+    return node_data;
+}
