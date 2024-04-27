@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="SDK\arithmetic.hpp" />
     <ClInclude Include="SDK\display.hpp" />
+    <ClInclude Include="SDK\fun.hpp" />
     <ClInclude Include="SDK\memory.hpp" />
     <ClInclude Include="SDK\data.hpp" />
     <ClInclude Include="SDK\node.hpp" />
