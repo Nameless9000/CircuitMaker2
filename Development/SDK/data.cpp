@@ -80,7 +80,7 @@ static NodeData preprocess_data(NodeData* input) {
 }
 
 std::string NodeData::compile(bool compile_for_speed, char max_x, char max_z) {
-	NodeData processed_data = preprocess_data(this);
+	NodeData processed_data = *this;// preprocess_data(this);
 
 	char x = 0;
 	char y = 0;

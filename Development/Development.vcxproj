@@ -135,6 +135,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SDK\arithmetic.cpp" />
     <ClCompile Include="SDK\data.cpp" />
     <ClCompile Include="SDK\display.cpp" />
     <ClCompile Include="SDK\memory.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="sdk_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SDK\arithmetic.hpp" />
     <ClInclude Include="SDK\display.hpp" />
     <ClInclude Include="SDK\memory.hpp" />
     <ClInclude Include="SDK\data.hpp" />

@@ -8,4 +8,5 @@ namespace Tests {
     NodeData shift_register_test();
     NodeData decoder_test();
     NodeData sram_test();
+    NodeData full_adder_test();
 }

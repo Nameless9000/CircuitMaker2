@@ -182,3 +182,38 @@ NodeData Tests::sram_test() {
 
     return node_data;
 }
+
+NodeData Tests::full_adder_test()
+{
+    std::cout << "#### FULL ADDER TEST ####" << std::endl;
+
+    NodeData node_data = NodeData();
+
+    Arithmetic::FullAdder adder = Arithmetic::FullAdder(&node_data, 8);
+
+    char count = 0;
+    for (NodeRef bit : adder.input_bits1) {
+        bit << node_data.create<FLIPFLOP>(NodePosition{ -5, 1, count });
+
+        count++;
+    }
+
+    count = 0;
+    for (NodeRef bit : adder.input_bits2) {
+        bit << node_data.create<FLIPFLOP>(NodePosition{ -5, 2, count });
+
+        count++;
+    }
+
+    count = 0;
+    for (NodeRef bit : adder.output_bits) {
+        bit >> node_data.create<LED>(NodePosition{ -5, 3, count }, true);
+
+        count++;
+    }
+
+    adder.carry_bit
+        >> node_data.create<LED>(NodePosition{ -5, 3, count }, true);
+
+    return node_data;
+}

@@ -10,7 +10,8 @@ int main() {
         Tests::decoder_test,
         Tests::sram_test,
         Tests::shift_register_test,
-        Tests::seven_segment_decimal_test
+        Tests::seven_segment_decimal_test,
+        Tests::full_adder_test
     }) {
         auto start = std::chrono::high_resolution_clock::now();
 
