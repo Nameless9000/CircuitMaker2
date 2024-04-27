@@ -26,6 +26,8 @@ Arithmetic::FullAdder::FullAdder(NodeData* node_data, unsigned char bits) {
 		carry_buf >> NodeVec{ output, and_gate1 };
 		xor_gate >> NodeVec{ output, and_gate1 };
 
+		and_gate2 >> and_gate1;
+
 		carry << NodeVec{ and_gate1, and_gate2 };
 		carry_bit = carry;
 	}
