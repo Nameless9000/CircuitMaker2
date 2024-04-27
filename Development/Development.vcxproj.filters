@@ -65,7 +65,7 @@
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
     <ClInclude Include="SDK\arithmetic.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\SDK</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
