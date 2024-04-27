@@ -1,5 +1,6 @@
 #include <iostream>
-#include <map> 
+#include <algorithm>
+#include <map>
 #include "data.hpp"
 
 static bool contains_loop(NodeVec from, NodeVec to) {
@@ -11,6 +12,10 @@ static bool contains_loop(NodeVec from, NodeVec to) {
 	}
 
 	return false;
+}
+
+static bool compare_connections(Node n1, Node n2) {
+	return (n1.destination.size() + n1.source.size()) > (n2.destination.size() + n2.source.size());
 }
 
 static NodeData preprocess_data(NodeData* input) {
@@ -68,6 +73,9 @@ static NodeData preprocess_data(NodeData* input) {
 		new_data.nodes.push_back(node);
 	}
 
+	// high connections are first, reducing size
+	std::sort(new_data.nodes.begin(), new_data.nodes.end(), compare_connections);
+
 	return new_data;
 }
 
@@ -79,10 +87,7 @@ std::string NodeData::compile(char max_x, char max_z) {
 	char z = 0;
 
 	int block_count = 0;
-	int connection_count = 0;
-
 	std::string blocks = "";
-	std::string connections = "";
 
 	std::map<unsigned short, unsigned short> node_id_substitution;
 
@@ -137,6 +142,9 @@ std::string NodeData::compile(char max_x, char max_z) {
 	}
 
 	// handle connections
+	int connection_count = 0;
+	std::string connections = "";
+
 	unsigned short index = 1;
 	for (Node node : processed_data.nodes) {
 		for (NodeRef destination_node : node.destination) {
@@ -155,7 +163,7 @@ std::string NodeData::compile(char max_x, char max_z) {
 
 	std::string save_string = blocks + "?" + connections;
 
-	std::cout << "[Compile Stats] Raw: " << save_string.length() << " | Blocks: " << block_count << " | Connections : " << connection_count << "\n\n";
+	std::cout << "[Compile Stats] Raw: " << save_string.length() << " | Blocks: " << block_count << " (" << blocks.length() << ") | Connections: " << connection_count << " (" << connections.length() << ")\n\n";
 
 	return save_string;
 }
