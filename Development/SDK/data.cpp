@@ -87,7 +87,7 @@ static NodeData preprocess_data(NodeData* input) {
 	return new_data;
 }
 
-std::string NodeData::compile(bool compile_for_speed, short max_x, short max_z) {
+std::string NodeData::compile(bool compile_for_speed, bool optimize_positions, short max_x, short max_z) {
 	NodeData processed_data = preprocess_data(this);
 
 	short x = 0;
@@ -127,13 +127,15 @@ std::string NodeData::compile(bool compile_for_speed, short max_x, short max_z) 
 			blocks += to_string_nozero(y) + ",";
 			blocks += to_string_nozero(z);
 
-			x++;
-			if (x == max_x) {
-				x = 0;
-				z++;
-				if (z == max_z) {
-					z = 0;
-					y++;
+			if (!optimize_positions) {
+				x++;
+				if (x == max_x) {
+					x = 0;
+					z++;
+					if (z == max_z) {
+						z = 0;
+						y++;
+					}
 				}
 			}
 		}
