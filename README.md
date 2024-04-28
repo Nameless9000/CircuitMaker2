@@ -63,7 +63,7 @@ std::cout << node_data.compile();
 ```
 
 ## Modules:
-Currently there are the "Memory" and "Plexers" modules (may be out of date at time of reading), they can be used to auto-generate things like Registers.
+Currently there are the Memory, Plexers, Arithmetic, and Fun modules (may be out of date at time of reading), they can be used to auto-generate things like Registers.
 If you would like a full list of what you can do then you can view the header files (*.hpp) inside `/Development/SDK`
 
 An example of using one:
