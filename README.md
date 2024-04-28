@@ -34,7 +34,7 @@ NodeData node_data = NodeData();
 
 // create an LED block
 // the ({}, true) sets the position to automatic and disables optimization
-NodeRef led = node_data.create<AND>({}, true);
+NodeRef led = node_data.create<LED>({}, true);
 // create a BUTTON block
 NodeRef button = node_data.create<BUTTON>();
 
@@ -45,9 +45,12 @@ button >> led;
 ### Finishing things off
 To finish and compile the save string you can use
 ```c++
-NodeData::compile(char max_x = 5, char max_z = 5)
+NodeData::compile(bool no_debug, bool compile_for_speed, bool optimize_positions, short max_x, short max_z)
 ```
 It will return an `std::string` for you to print or save.
+`no_debug` removes the compilation stats
+`compile_for_speed` replaced OR and LEDs with NODES
+`optimize_positions` will put all the auto-generated positions in 1 spot reducing save size
 The `max_x` and `max_z` are for the auto-generated block positions, it will generate a tower with those dimensions.
 
 Example:
