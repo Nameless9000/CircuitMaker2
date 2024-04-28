@@ -43,12 +43,12 @@ struct Node {
 	NodeVec destination;
 	
 	bool dont_optimize;
-	unsigned short node_id;
+	unsigned int node_id;
 };
 
 struct NodeRef {
 	std::vector<Node>* nodes;
-	unsigned short node_id;
+	unsigned int node_id;
 
 	NodeRef();
 	NodeRef(std::vector<Node>* nodes_vector);

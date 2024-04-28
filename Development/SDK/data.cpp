@@ -97,7 +97,7 @@ std::string NodeData::compile(bool compile_for_speed, short max_x, short max_z) 
 	int block_count = 0;
 	std::string blocks = "";
 
-	std::map<unsigned short, unsigned short> node_id_substitution;
+	std::map<unsigned int, unsigned int> node_id_substitution;
 
 	for (Node node : processed_data.nodes) {
 		if (!blocks.empty()) blocks += ";";
