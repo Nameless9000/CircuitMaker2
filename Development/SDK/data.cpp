@@ -87,7 +87,7 @@ static NodeData preprocess_data(NodeData* input) {
 	return new_data;
 }
 
-std::string NodeData::compile(bool compile_for_speed, bool optimize_positions, short max_x, short max_z) {
+std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimize_positions, short max_x, short max_z) {
 	NodeData processed_data = preprocess_data(this);
 
 	short x = 0;
@@ -182,9 +182,11 @@ std::string NodeData::compile(bool compile_for_speed, bool optimize_positions, s
 
 	std::string save_string = blocks + "?" + connections;
 
-	std::cout
-		<< "[Compile Stats] Raw: " << save_string.length() << " | Blocks: " << block_count << " (" << blocks.length() << ") | Connections: " << connection_count << " (" << connections.length() << ")"
-		<< std::endl;
+	if (!no_debug) {
+		std::cout
+			<< "[Compile Stats] Raw: " << save_string.length() << " | Blocks: " << block_count << " (" << blocks.length() << ") | Connections: " << connection_count << " (" << connections.length() << ")"
+			<< std::endl;
+	}
 
 	return save_string;
 }
