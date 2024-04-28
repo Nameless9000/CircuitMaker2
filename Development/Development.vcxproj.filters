@@ -41,6 +41,9 @@
     <ClCompile Include="SDK\arithmetic.cpp">
       <Filter>Source Files\SDK</Filter>
     </ClCompile>
+    <ClCompile Include="SDK\fun.cpp">
+      <Filter>Source Files\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\node.hpp">
@@ -65,6 +68,9 @@
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
     <ClInclude Include="SDK\arithmetic.hpp">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\fun.hpp">
       <Filter>Header Files\SDK</Filter>
     </ClInclude>
   </ItemGroup>

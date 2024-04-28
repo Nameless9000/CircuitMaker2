@@ -11,7 +11,7 @@ NodeData Tests::seven_segment_decimal_test() {
 
     Display::SevenSegmentDecimal display = Display::SevenSegmentDecimal(&node_data);
 
-    for (char i = 0; i < 9; i++) {
+    for (short i = 0; i < 9; i++) {
         node_data.create<FLIPFLOP>(NodePosition{ i, 0, -1 }) >> display.bits[i];
     }
 
@@ -84,7 +84,7 @@ NodeData Tests::register_test() {
     register1.update_bit
         << node_data.create<BUTTON>(NodePosition{ -5, 5, 0 });
 
-    char count = 1;
+    short count = 1;
     for (NodeRef bit : register1.input_bits) {
         bit << node_data.create<FLIPFLOP>(NodePosition{ -5, 5, count });
 
@@ -114,7 +114,7 @@ NodeData Tests::shift_register_test() {
     sregister.input_bit
         << node_data.create<FLIPFLOP>(NodePosition{ -5, 5, 1 });
 
-    char count = 1;
+    short count = 1;
     for (NodeRef bit : sregister.output_bits) {
         bit >> node_data.create<LED>(NodePosition{ -5, 6, count }, true);
 
@@ -132,7 +132,7 @@ NodeData Tests::decoder_test() {
     unsigned char data_bits = 3;
     Plexers::Decoder decoder = Plexers::Decoder(&node_data, data_bits);
 
-    char count = 0;
+    short count = 0;
     for (NodeRef bit : decoder.input_bits) {
         bit << node_data.create<FLIPFLOP>(NodePosition{ -5, 5, count });
 
@@ -156,7 +156,7 @@ NodeData Tests::sram_test() {
 
     Memory::SRAM sram = Memory::SRAM(&node_data, 1, 8);
 
-    char count = 0;
+    short count = 0;
     for (NodeRef bit : sram.addr_decoder.input_bits) {
         bit << node_data.create<FLIPFLOP>(NodePosition{ -5, 5, count });
 
@@ -191,7 +191,7 @@ NodeData Tests::full_adder_test()
 
     Arithmetic::FullAdder adder = Arithmetic::FullAdder(&node_data, 8);
 
-    char count = 0;
+    short count = 0;
     for (NodeRef bit : adder.input_bits1) {
         bit << node_data.create<FLIPFLOP>(NodePosition{ -5, 1, count });
 

@@ -87,12 +87,12 @@ static NodeData preprocess_data(NodeData* input) {
 	return new_data;
 }
 
-std::string NodeData::compile(bool compile_for_speed, char max_x, char max_z) {
+std::string NodeData::compile(bool compile_for_speed, short max_x, short max_z) {
 	NodeData processed_data = preprocess_data(this);
 
-	char x = 0;
-	char y = 0;
-	char z = 0;
+	short x = 0;
+	short y = 0;
+	short z = 0;
 
 	int block_count = 0;
 	std::string blocks = "";

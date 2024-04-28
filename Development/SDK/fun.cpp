@@ -1,8 +1,8 @@
 #include "fun.hpp"
 
 void Fun::generate_text(NodeData* node_data, std::string text, bool wordwrap, unsigned short wordwrap_size) {
-    char x = 0;
-    char z = 0;
+    short x = 0;
+    short z = 0;
 
     for (char& code : text) {
         if ((wordwrap && x >= wordwrap_size && code == 32) || code == 10) {

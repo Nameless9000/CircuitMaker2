@@ -24,9 +24,9 @@ enum NodeTypes {
 };
 
 struct NodePosition {
-	char x = -1;
-	char y = -1;
-	char z = -1;
+	short x = -1;
+	short y = -1;
+	short z = -1;
 };
 
 struct NodeRef;
