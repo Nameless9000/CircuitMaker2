@@ -1,7 +1,6 @@
 #include "data.h"
 #include <iostream>
 #include <algorithm>
-#include <map>
 
 static bool contains_loop(NodeVec from, NodeVec to) {
 	for (NodeRef node1 : from) {

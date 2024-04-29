@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <map>
 
 enum NodeTypes {
 	NOR,
@@ -44,6 +45,17 @@ struct Node {
 
 	bool dont_optimize;
 	unsigned int node_id;
+};
+
+struct SpecialBuildingNode {
+	std::string building_type;
+	NodePosition position;
+	std::vector<float> cframe_rotation_matrix;
+	std::map<unsigned char, unsigned int> connections;
+};
+
+struct SignNode {
+	std::string text;
 };
 
 struct NodeData;
