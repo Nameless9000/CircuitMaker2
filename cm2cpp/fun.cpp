@@ -1,4 +1,4 @@
-#include "fun.hpp"
+#include "fun.h"
 
 void Fun::generate_text(NodeData* node_data, std::string text, bool wordwrap, unsigned short wordwrap_size) {
     short x = 0;

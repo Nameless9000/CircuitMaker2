@@ -1,20 +1,21 @@
+#include "node.h"
+#include "data.h"
 #include <stdexcept>
-#include "node.hpp"
 
-NodeRef::NodeRef() : nodes(0), node_id(-1) {}
-NodeRef::NodeRef(std::vector<Node>* nodes_vector) {
-	nodes = nodes_vector;
-	node_id = (unsigned short)(nodes->size() - 1);
+NodeRef::NodeRef() : node_data(0), node_id(-1) {}
+NodeRef::NodeRef(NodeData* node_datax) {
+	node_data = node_datax;
+	node_id = (unsigned short)(node_data->nodes.size() - 1);
 
-	nodes->back().node_id = node_id; // make a copy for compilation
+	node_data->nodes.back().node_id = node_id; // make a copy for compilation
 }
 
 Node* NodeRef::get() {
-	return &nodes->at(node_id);
+	return &node_data->nodes.at(node_id);
 }
 
 NodeRef& NodeRef::operator>>(const NodeRef& node) {
-	if (node.nodes == nullptr)
+	if (node.node_data == nullptr)
 		throw std::invalid_argument("node is invalid");
 
 	NodeRef node_copy = node;
@@ -26,18 +27,18 @@ NodeRef& NodeRef::operator>>(const NodeRef& node) {
 
 NodeRef& NodeRef::operator>>(const NodeVec& nodes) {
 	for (NodeRef node : nodes) {
-		if (node.nodes == nullptr)
+		if (node.node_data == nullptr)
 			throw std::invalid_argument("node is invalid");
 
 		get()->destination.push_back(node);
 		node.get()->source.push_back(*this);
 	}
-	
+
 	return *this;
 }
 
 NodeRef& NodeRef::operator<<(const NodeRef& node) {
-	if (node.nodes == nullptr)
+	if (node.node_data == nullptr)
 		throw std::invalid_argument("node is invalid");
 
 	NodeRef node_copy = node;
@@ -49,7 +50,7 @@ NodeRef& NodeRef::operator<<(const NodeRef& node) {
 
 NodeRef& NodeRef::operator<<(const NodeVec& nodes) {
 	for (NodeRef node : nodes) {
-		if (node.nodes == nullptr)
+		if (node.node_data == nullptr)
 			throw std::invalid_argument("node is invalid");
 
 		get()->source.push_back(node);

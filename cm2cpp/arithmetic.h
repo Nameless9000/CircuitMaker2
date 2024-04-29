@@ -1,5 +1,5 @@
 #pragma once
-#include "data.hpp"
+#include "data.h"
 
 namespace Arithmetic {
 	struct FullAdder {

@@ -1,4 +1,4 @@
-#include "memory.hpp"
+#include "memory.h"
 
 using namespace Memory;
 
@@ -41,9 +41,9 @@ ShiftRegister::ShiftRegister(NodeData* node_data, unsigned char bits, bool shoul
 
         if (count == 0)
             input_bit = memory_cell.input_bit;
-        else 
+        else
             last_cell.output_bit >> memory_cell.input_bit;
-            
+
         output_bits.push_back(memory_cell.output_bit);
 
         last_cell = memory_cell;
@@ -81,9 +81,9 @@ SRAM::SRAM(NodeData* node_data, unsigned char select_bits, unsigned char registe
         for (NodeRef bit : data_register.output_bits) {
             NodeRef read_block = node_data->create<AND>();
 
-            read_block 
-                << NodeVec{bit, select_bit}
-                >> output_bits.at(count);
+            read_block
+                << NodeVec{ bit, select_bit }
+            >> output_bits.at(count);
 
             count++;
         }

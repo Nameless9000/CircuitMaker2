@@ -1,4 +1,4 @@
-#include "arithmetic.hpp"
+#include "arithmetic.h"
 
 Arithmetic::FullAdder::FullAdder(NodeData* node_data, unsigned char bits) {
 	for (unsigned char _ = 0; _ < bits; _++) {
@@ -20,11 +20,11 @@ Arithmetic::FullAdder::FullAdder(NodeData* node_data, unsigned char bits) {
 		input1 >> NodeVec{ xor_gate, and_gate2 };
 		input2 >> NodeVec{ xor_gate, and_gate2 };
 
-		if (carry_bit_out.nodes != nullptr)
+		if (carry_bit_out.node_data != nullptr)
 			carry_bit_out >> carry_buf;
 
 		carry_buf >> NodeVec{ output, and_gate1 };
-		if (carry_bit_in.nodes == nullptr)
+		if (carry_bit_in.node_data == nullptr)
 			carry_bit_in = carry_buf;
 		xor_gate >> NodeVec{ output, and_gate1 };
 

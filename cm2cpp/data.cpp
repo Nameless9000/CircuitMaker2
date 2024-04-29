@@ -1,7 +1,7 @@
+#include "data.h"
 #include <iostream>
 #include <algorithm>
 #include <map>
-#include "data.hpp"
 
 static bool contains_loop(NodeVec from, NodeVec to) {
 	for (NodeRef node1 : from) {
@@ -33,7 +33,7 @@ static NodeData preprocess_data(NodeData* input) {
 		if (node.dont_optimize || contains_loop(node.source, node.destination)) {
 			goto ADD_NODE;
 		}
-		
+
 		if (
 			node.source.size() == 0 && (
 				node.type != FLIPFLOP &&
@@ -49,31 +49,32 @@ static NodeData preprocess_data(NodeData* input) {
 			continue;
 
 		switch (node.type) {
-			case NODE:
-			case CUSTOM:
-			case TILE:
-			case TEXT:
-			case LED:
-			case OR:
-				if (node.source.size() == 1) {
-					for (NodeRef dnode : node.destination) {
-						node.source.front() >> dnode;
-					}
-					continue;
-				} else if (node.destination.size() == 1) {
-					for (NodeRef snode : node.source) {
-						node.destination.front() << snode;
-					}
-					continue;
+		case NODE:
+		case CUSTOM:
+		case TILE:
+		case TEXT:
+		case LED:
+		case OR:
+			if (node.source.size() == 1) {
+				for (NodeRef dnode : node.destination) {
+					node.source.front() >> dnode;
 				}
-				[[fallthrough]];
-			case AND:
-			case XOR:
-			case BUTTON:
-				if (node.source.size() == 1 && node.destination.size() == 1) {
-					node.source.front() >> node.destination.front();
-					continue;
+				continue;
+			}
+			else if (node.destination.size() == 1) {
+				for (NodeRef snode : node.source) {
+					node.destination.front() << snode;
 				}
+				continue;
+			}
+			[[fallthrough]];
+		case AND:
+		case XOR:
+		case BUTTON:
+			if (node.source.size() == 1 && node.destination.size() == 1) {
+				node.source.front() >> node.destination.front();
+				continue;
+			}
 		}
 
 	ADD_NODE:
@@ -196,7 +197,7 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 template <NodeTypes T>
 NodeRef NodeData::create(NodePosition position, bool dont_optimize, bool state, std::vector<short> properties) {
 	nodes.push_back({ T, state, position, properties, {}, {}, dont_optimize });
-	return NodeRef(&nodes);
+	return NodeRef(this);
 };
 
 // sorry...

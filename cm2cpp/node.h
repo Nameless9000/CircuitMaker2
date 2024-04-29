@@ -41,17 +41,19 @@ struct Node {
 
 	NodeVec source;
 	NodeVec destination;
-	
+
 	bool dont_optimize;
 	unsigned int node_id;
 };
 
+struct NodeData;
+
 struct NodeRef {
-	std::vector<Node>* nodes;
+	NodeData* node_data;
 	unsigned int node_id;
 
 	NodeRef();
-	NodeRef(std::vector<Node>* nodes_vector);
+	NodeRef(NodeData* node_data);
 
 	Node* get();
 

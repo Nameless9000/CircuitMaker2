@@ -1,4 +1,4 @@
-#include "display.hpp"
+#include "display.h"
 
 Display::SevenSegmentDecimal::SevenSegmentDecimal(NodeData* node_data) {
 	a = node_data->create<LED>();

@@ -1,6 +1,6 @@
 #pragma once
-#include "data.hpp"
-#include "plexers.hpp"
+#include "data.h"
+#include "plexers.h"
 
 namespace Memory {
     struct MemoryCell {

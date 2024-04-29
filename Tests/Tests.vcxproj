@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{269d1ca5-53b4-46e8-b766-7705e33fd8f1}</ProjectGuid>
-    <RootNamespace>Development</RootNamespace>
+    <ProjectGuid>{a1c80d43-040f-4b41-a3cc-cb2da495e5ca}</ProjectGuid>
+    <RootNamespace>Tests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Library</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -105,13 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,38 +121,29 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ShowProgress>LinkVerboseLib</ShowProgress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SDK\arithmetic.cpp" />
-    <ClCompile Include="SDK\data.cpp" />
-    <ClCompile Include="SDK\display.cpp" />
-    <ClCompile Include="SDK\fun.cpp" />
-    <ClCompile Include="SDK\memory.cpp" />
-    <ClCompile Include="SDK\node.cpp" />
-    <ClCompile Include="SDK\plexers.cpp" />
     <ClCompile Include="sdk_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SDK\arithmetic.hpp" />
-    <ClInclude Include="SDK\display.hpp" />
-    <ClInclude Include="SDK\fun.hpp" />
-    <ClInclude Include="SDK\memory.hpp" />
-    <ClInclude Include="SDK\data.hpp" />
-    <ClInclude Include="SDK\node.hpp" />
-    <ClInclude Include="sdk.hpp" />
-    <ClInclude Include="SDK\plexers.hpp" />
-    <ClInclude Include="sdk_tests.hpp" />
+    <ClInclude Include="sdk_tests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cm2cpp\cm2cpp.vcxproj">
+      <Project>{69ac2b5d-0d8a-46d6-b034-2da53ff7ed25}</Project>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

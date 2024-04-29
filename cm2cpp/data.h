@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "node.hpp"
+#include "node.h"
 
 struct NodeData {
 	std::vector<Node> nodes;
