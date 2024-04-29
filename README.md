@@ -3,14 +3,19 @@ Development for a c++ to Circuit Maker 2 save string generator.
 Game Link: https://www.roblox.com/games/6652606416/Circuit-Maker-2
 
 ## How to use:
-To use this you need to know C++. Currently the SDK is in development so will be major breaking changes.
+To use this you need to know C++. Currently the library is in development so will be major breaking changes.
 
 ### Setting it up
-To start off a project you need to include the sdk and initialize the node data
+There are 2 main ways to use the library:
+1. Use a pre-compiled .lib file for the library
+2. Add a reference to the cm2cpp project in visual studio (easiest + you can change anything)
 
+Once you have set it up and made sure you can reference things correctly you can start.
+
+To create start a creation you can write something like this:
 ```c++
 // include the sdk
-#include "sdk.hpp"
+#include "sdk.h"
 
 void main() {
   // initialize the node data
@@ -21,7 +26,7 @@ void main() {
 ### Creating blocks
 To create a block you can the following:
 ```c++
-NodeData::create<NodeType T>(NodePosition position, bool state, std::vector<short> properties);
+NodeData::create<NodeType T>(NodePosition position, bool dont_optimize, bool state, std::vector<short> properties);
 ```
 This function returns a `NodeRef` type, the main type that should be used for blocks.
 If you do not specify the `NodePosition position` (you can put it as a vector of chars) it will be automatically generated.
@@ -67,22 +72,33 @@ std::cout << node_data.compile();
 
 ## Modules:
 Currently there are the Memory, Plexers, Arithmetic, and Fun modules (may be out of date at time of reading), they can be used to auto-generate things like Registers.
-If you would like a full list of what you can do then you can view the header files (*.hpp) inside `/Development/SDK`
+If you would like a full list of what you can do then you can view the header files (*.h) inside the `cm2cpp` solution
 
-An example of using one:
+Here is a commented version of one of the tests using Memory::MemoryCell
 ```c++
-NodeData node_data = NodeData();
+// include the sdk
+#include "sdk.h"
 
-Memory::MemoryCell memory_cell = Memory::MemoryCell(&node_data);
+void main() {
+	// initialize the node data (save file)
+	NodeData node_data = NodeData();
 
-memory_cell.input_bit
-  << node_data.create<FLIPFLOP>(NodePosition{ 1, 5, 0 });
+	// create a memory cell inside that node data (it will be an auto generated position)
+	Memory::MemoryCell memory_cell = Memory::MemoryCell(&node_data);
 
-memory_cell.output_bit
-  >> node_data.create<LED>(NodePosition{ 2, 5, 0 }, true);
+	// connect an input
+	memory_cell.input_bit
+	  << node_data.create<FLIPFLOP>(NodePosition{ 1, 5, 0 });
 
-memory_cell.update_bit
-  << node_data.create<BUTTON>(NodePosition{ 3, 5, 0 });
+	// connect and output
+	memory_cell.output_bit
+	  >> node_data.create<LED>(NodePosition{ 2, 5, 0 }, true);
 
-std::cout << node_data.compile();
+	// add an update button
+	memory_cell.update_bit
+	  << node_data.create<BUTTON>(NodePosition{ 3, 5, 0 });
+
+	// output the save to the console
+	std::cout << node_data.compile();
+}
 ```
