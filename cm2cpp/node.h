@@ -58,6 +58,8 @@ struct SpecialBuildingNode {
 struct SignNode {
 	std::string text;
 
+	SignNode(std::string data);
+
 	std::string to_hex();
 };
 

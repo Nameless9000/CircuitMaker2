@@ -61,6 +61,8 @@ NodeRef& NodeRef::operator<<(const NodeVec& nodes) {
 	return *this;
 }
 
+SignNode::SignNode(std::string data) : text(data) {}
+
 std::string SignNode::to_hex()
 {
 	const char* hex_chars = "0123456789ABCDEF";
