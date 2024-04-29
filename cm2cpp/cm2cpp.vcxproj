@@ -159,6 +159,7 @@
     <ClInclude Include="memory.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="plexers.h" />
+    <ClInclude Include="save_data.h" />
     <ClInclude Include="sdk.h" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +170,7 @@
     <ClCompile Include="memory.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="plexers.cpp" />
+    <ClCompile Include="save_data.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

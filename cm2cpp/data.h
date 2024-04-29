@@ -9,6 +9,4 @@ struct NodeData {
 
 	template <NodeTypes T>
 	NodeRef create(NodePosition position = {}, bool dont_optimize = false, bool state = false, std::vector<short> properties = {});
-
-	void import_savestring(std::string savestring);
 };
