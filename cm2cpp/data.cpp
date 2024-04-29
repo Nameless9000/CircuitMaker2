@@ -238,8 +238,8 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 			<< "[Compile Stats] Raw: " << save_string.length()
 			<< " | Blocks: " << block_count << " (" << blocks.length()
 			<< ") | Connections: " << connection_count << " (" << connections.length()
-			<< ") | Special Buildings: " << special_building_count << "(" << special_buildings.length()
-			<< ") | Signs: " << sign_count << "(" << signs.length() << ")"
+			<< ") | Special Buildings: " << special_building_count << " (" << special_buildings.length()
+			<< ") | Signs: " << sign_count << " (" << signs.length() << ")"
 			<< std::endl;
 	}
 
