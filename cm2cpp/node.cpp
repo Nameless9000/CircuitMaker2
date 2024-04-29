@@ -1,6 +1,7 @@
 #include "node.h"
 #include "data.h"
 #include <stdexcept>
+#include <iomanip>
 
 NodeRef::NodeRef() : node_data(0), node_id(-1) {}
 NodeRef::NodeRef(NodeData* node_datax) {
@@ -58,4 +59,17 @@ NodeRef& NodeRef::operator<<(const NodeVec& nodes) {
 	}
 
 	return *this;
+}
+
+std::string SignNode::to_hex()
+{
+	const char* hex_chars = "0123456789ABCDEF";
+
+	std::string hex;
+	for (unsigned char c : text) {
+		hex.push_back(hex_chars[c >> 4]);
+		hex.push_back(hex_chars[c & 15]);
+	}
+
+	return hex;
 }

@@ -222,7 +222,16 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 		}
 	}
 
-	std::string save_string = blocks + "?" + connections + "?" + special_buildings;
+	// handle signs
+	int sign_count = 0;
+	std::string signs = "";
+	for (SignNode sign : processed_data.signs) {
+		if (!signs.empty()) signs += ";";
+
+		signs += sign.to_hex();
+	}
+
+	std::string save_string = blocks + "?" + connections + "?" + special_buildings + "?" + signs;
 
 	if (!no_debug) {
 		std::cout
@@ -230,6 +239,7 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 			<< " | Blocks: " << block_count << " (" << blocks.length()
 			<< ") | Connections: " << connection_count << " (" << connections.length()
 			<< ") | Special Buildings: " << special_building_count << "(" << special_buildings.length()
+			<< ") | Signs: " << sign_count << "(" << signs.length() << ")"
 			<< std::endl;
 	}
 
