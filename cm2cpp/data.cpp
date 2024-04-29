@@ -190,6 +190,7 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 		if (!special_buildings.empty()) special_buildings += ";";
 
 		special_buildings += node.building_type;
+		special_building_count++;
 
 		if (!(node.position.x == -1 && node.position.y == -1 && node.position.z == -1)) {
 			special_buildings += ",";
