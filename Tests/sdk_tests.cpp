@@ -67,7 +67,7 @@ void Tests::memory_cell_test(NodeData* node_data) {
 void Tests::register_test(NodeData* node_data) {
     std::cout << "#### REGISTER TEST ####" << std::endl;
 
-    unsigned char register_size = 16;
+    unsigned char register_size = 4;
     Memory::Register register1 = Memory::Register(node_data, register_size);
 
     register1.update_bit
@@ -131,7 +131,7 @@ void Tests::decoder_test(NodeData* node_data) {
 void Tests::sram_test(NodeData* node_data) {
     std::cout << "#### SRAM TEST ####" << std::endl;
 
-    Memory::SRAM sram = Memory::SRAM(node_data, 1, 8);
+    Memory::SRAM sram = Memory::SRAM(node_data, 1, 4);
 
     short count = 0;
     for (NodeRef bit : sram.addr_decoder.input_bits) {
@@ -162,7 +162,7 @@ void Tests::full_adder_test(NodeData* node_data)
 {
     std::cout << "#### FULL ADDER TEST ####" << std::endl;
 
-    Arithmetic::FullAdder adder = Arithmetic::FullAdder(node_data, 8);
+    Arithmetic::FullAdder adder = Arithmetic::FullAdder(node_data, 4);
 
     short count = 0;
     for (NodeRef bit : adder.input_bits1) {
