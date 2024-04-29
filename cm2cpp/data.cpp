@@ -28,6 +28,9 @@ static std::string to_string_nozero(T number) {
 static NodeData preprocess_data(NodeData* input) {
 	NodeData new_data = NodeData();
 
+	new_data.special_buildings = input->special_buildings;
+	new_data.signs = input->signs;
+
 	for (Node node : input->nodes) {
 		if (node.dont_optimize || contains_loop(node.source, node.destination)) {
 			goto ADD_NODE;
@@ -180,11 +183,52 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 		index++;
 	}
 
-	std::string save_string = blocks + "?" + connections;
+	// handle special buildings
+	int special_building_count = 0;
+	std::string special_buildings = "";
+	for (SpecialBuildingNode node : processed_data.special_buildings) {
+		if (!special_buildings.empty()) special_buildings += ";";
+
+		special_buildings += node.building_type;
+
+		if (!(node.position.x == -1 && node.position.y == -1 && node.position.z == -1)) {
+			special_buildings += ",";
+			special_buildings += to_string_nozero(node.position.x) + ",";
+			special_buildings += to_string_nozero(node.position.y) + ",";
+			special_buildings += to_string_nozero(node.position.z);
+		}
+
+		if (!node.cframe_rotation_matrix.empty()) {
+			for (float rotation_matrix : node.cframe_rotation_matrix) {
+				special_buildings += ",";
+				special_buildings += to_string_nozero(rotation_matrix);
+			}
+		}
+
+		if (node.connections.empty())
+			continue;
+
+		special_buildings += ",";
+
+		bool started = false;
+		for (auto const& [slot, to_node] : node.connections) {
+			if (started)
+				special_buildings += "+";
+
+			special_buildings += std::to_string(slot) + std::to_string(to_node);
+
+			started = true;
+		}
+	}
+
+	std::string save_string = blocks + "?" + connections + "?" + special_buildings;
 
 	if (!no_debug) {
 		std::cout
-			<< "[Compile Stats] Raw: " << save_string.length() << " | Blocks: " << block_count << " (" << blocks.length() << ") | Connections: " << connection_count << " (" << connections.length() << ")"
+			<< "[Compile Stats] Raw: " << save_string.length()
+			<< " | Blocks: " << block_count << " (" << blocks.length()
+			<< ") | Connections: " << connection_count << " (" << connections.length()
+			<< ") | Special Buildings: " << special_building_count << "(" << special_buildings.length()
 			<< std::endl;
 	}
 
