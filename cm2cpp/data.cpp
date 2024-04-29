@@ -192,6 +192,10 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 	return save_string;
 }
 
+void NodeData::import_savestring(std::string savestring) {
+
+}
+
 #define INSTANTIATE_CREATE(T) template NodeRef NodeData::create<T>(NodePosition, bool, bool, std::vector<short>)
 
 template <NodeTypes T>
