@@ -3,7 +3,13 @@ Development for a c++ to Circuit Maker 2 save string generator.
 Game Link: https://www.roblox.com/games/6652606416/Circuit-Maker-2
 
 ## How to use:
-To use this you need to know C++. Currently the library is in development so will be major breaking changes.
+Currently the library is in development so will be major breaking changes.
+So don't make anything too insane unless you're ready to change things once you update.
+
+Prerequisites:
+- You need to know C++...
+- How to add a static library
+- (optional) Visual Studio
 
 ### Setting it up
 There are 2 main ways to use the library:
@@ -12,7 +18,7 @@ There are 2 main ways to use the library:
 
 Once you have set it up and made sure you can reference things correctly you can start.
 
-To create start a creation you can write something like this:
+To start a creation you can write something like this:
 ```c++
 // include the sdk
 #include "sdk.h"
