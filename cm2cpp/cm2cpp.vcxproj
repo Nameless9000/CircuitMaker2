@@ -154,7 +154,6 @@
     <ClInclude Include="arithmetic.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="display.h" />
-    <ClInclude Include="framework.h" />
     <ClInclude Include="fun.h" />
     <ClInclude Include="memory.h" />
     <ClInclude Include="node.h" />

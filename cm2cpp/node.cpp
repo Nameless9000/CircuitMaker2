@@ -65,6 +65,9 @@ SignNode::SignNode(std::string data) : text(data) {}
 
 std::string SignNode::to_hex()
 {
+	if (!hex_data.empty())
+		return hex_data;
+
 	const char* hex_chars = "0123456789ABCDEF";
 
 	std::string hex;
@@ -73,5 +76,6 @@ std::string SignNode::to_hex()
 		hex.push_back(hex_chars[c & 15]);
 	}
 
+	hex_data = hex;
 	return hex;
 }
