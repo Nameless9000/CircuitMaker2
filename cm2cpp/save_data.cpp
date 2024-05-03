@@ -67,7 +67,7 @@ void SaveData::SaveString::import_string(NodeData* node_data) {
             connection_values.push_back(std::stoi(item));
         }
 
-        blocks[connection_values[0] - 1] << blocks[connection_values[1] - 1];
+        blocks[connection_values[0] - 1] >> blocks[connection_values[1] - 1];
     }
 
     // Load special buildings

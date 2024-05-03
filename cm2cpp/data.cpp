@@ -224,9 +224,11 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 	int sign_count = 0;
 	std::string signs = "";
 	for (SignNode sign : processed_data.signs) {
-		if (!signs.empty()) signs += ";";
+		if (sign_count > 1 || sign.text.empty())
+			signs += ";";
 
 		signs += sign.to_hex();
+        sign_count++;
 	}
 
 	std::string save_string = blocks + "?" + connections + "?" + special_buildings + "?" + signs;
