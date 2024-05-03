@@ -33,7 +33,7 @@ void SaveData::SaveString::import_string(NodeData* node_data) {
             state = std::stoi(blocks_values[1]);
         }
 
-        NodePosition position;
+        NodePosition position = { 0, 0, 0 };
         
         if (!blocks_values[2].empty()) {
             position.x = static_cast<short>(std::stoi(blocks_values[2]));
@@ -53,7 +53,7 @@ void SaveData::SaveString::import_string(NodeData* node_data) {
             }
         }
 
-        blocks.push_back(node_data->create(type, position, false, state, properties));
+        blocks.push_back(node_data->create(type, position, true, state, properties));
     }
 
     // Load connections
