@@ -209,17 +209,7 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 		if (node.connections.empty())
 			continue;
 
-		special_buildings += ",";
-
-		bool started = false;
-		for (auto const& [slot, to_node] : node.connections) {
-			if (started)
-				special_buildings += "+";
-
-			special_buildings += std::to_string(slot) + std::to_string(to_node);
-
-			started = true;
-		}
+		special_buildings += "," + node.connections;
 	}
 
 	// handle signs
