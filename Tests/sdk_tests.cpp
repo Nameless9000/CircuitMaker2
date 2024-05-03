@@ -202,10 +202,7 @@ void Tests::import_test(NodeData* node_data)
 {
     std::cout << "#### SAVE IMPORT TEST ####" << std::endl;
 
-    std::string save_string;
-
-    std::cout << "Enter save string: \n";
-    std::cin >> save_string;
+    std::string save_string = "0,1,5,0,-4,;5,0,0,0,0,0+0?2,1?Sign,5,0,8,0,0,1,0,1,-0,-1,0,0,12;Door,7,0,0,-1,0,0,0,1,0,0,0,-1,11?6869;";
 
     SaveData::SaveString save_data = SaveData::SaveString(save_string);
 
