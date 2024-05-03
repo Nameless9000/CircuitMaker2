@@ -28,13 +28,25 @@ void SaveData::SaveString::import_string(NodeData* node_data) {
 
         NodeTypes type = static_cast<NodeTypes>(std::stoi(blocks_values[0]));
 
-        bool state = std::stoi(blocks_values[1]);
+        bool state = false;
+        if (!blocks_values[1].empty()) {
+            state = std::stoi(blocks_values[1]);
+        }
 
-        NodePosition position {
-            static_cast<short>(std::stoi(blocks_values[2])),
-            static_cast<short>(std::stoi(blocks_values[3])),
-            static_cast<short>(std::stoi(blocks_values[4]))
-        };
+        NodePosition position;
+        
+        if (!blocks_values[2].empty()) {
+            position.x = static_cast<short>(std::stoi(blocks_values[2]));
+        }
+        if (!blocks_values[3].empty()) {
+            position.y = static_cast<short>(std::stoi(blocks_values[3]));
+        }
+        if (!blocks_values[4].empty()) {
+            position.z = static_cast<short>(std::stoi(blocks_values[4]));
+        }
+
+         if (blocks_values.size() != 6 || blocks_values[5].empty())
+            continue;
 
         std::vector<short> properties;
         std::stringstream properties_stream(blocks_values[5]);
