@@ -12,6 +12,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cm2cpp", "cm2cpp\cm2cpp.vcxproj", "{69AC2B5D-0D8A-46D6-B034-2DA53FF7ED25}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SaveOptimizerTool", "SaveOptimizerTool\SaveOptimizerTool.vcxproj", "{7DC4B3B8-B8DD-456D-8093-1D91FBDB0E14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -36,6 +38,14 @@ Global
 		{69AC2B5D-0D8A-46D6-B034-2DA53FF7ED25}.Release|x64.Build.0 = Release|x64
 		{69AC2B5D-0D8A-46D6-B034-2DA53FF7ED25}.Release|x86.ActiveCfg = Release|Win32
 		{69AC2B5D-0D8A-46D6-B034-2DA53FF7ED25}.Release|x86.Build.0 = Release|Win32
+		{7DC4B3B8-B8DD-456D-8093-1D91FBDB0E14}.Debug|x64.ActiveCfg = Debug|x64
+		{7DC4B3B8-B8DD-456D-8093-1D91FBDB0E14}.Debug|x64.Build.0 = Debug|x64
+		{7DC4B3B8-B8DD-456D-8093-1D91FBDB0E14}.Debug|x86.ActiveCfg = Debug|Win32
+		{7DC4B3B8-B8DD-456D-8093-1D91FBDB0E14}.Debug|x86.Build.0 = Debug|Win32
+		{7DC4B3B8-B8DD-456D-8093-1D91FBDB0E14}.Release|x64.ActiveCfg = Release|x64
+		{7DC4B3B8-B8DD-456D-8093-1D91FBDB0E14}.Release|x64.Build.0 = Release|x64
+		{7DC4B3B8-B8DD-456D-8093-1D91FBDB0E14}.Release|x86.ActiveCfg = Release|Win32
+		{7DC4B3B8-B8DD-456D-8093-1D91FBDB0E14}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
