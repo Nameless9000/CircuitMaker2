@@ -194,22 +194,30 @@ std::string NodeData::compile(bool no_debug, bool compile_for_speed, bool optimi
 
 		if (!(node.position.x == -1 && node.position.y == -1 && node.position.z == -1)) {
 			special_buildings += ",";
-			special_buildings += to_string_nozero(node.position.x) + ",";
-			special_buildings += to_string_nozero(node.position.y) + ",";
-			special_buildings += to_string_nozero(node.position.z);
+			special_buildings += std::to_string(node.position.x) + ",";
+			special_buildings += std::to_string(node.position.y) + ",";
+			special_buildings += std::to_string(node.position.z);
 		}
 
 		if (!node.cframe_rotation_matrix.empty()) {
 			for (float rotation_matrix : node.cframe_rotation_matrix) {
 				special_buildings += ",";
-				special_buildings += to_string_nozero(rotation_matrix);
+
+				std::string str = std::to_string(rotation_matrix);
+                str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+                str.erase(str.find_last_not_of('.') + 1, std::string::npos);
+
+				special_buildings += str;
 			}
 		}
 
 		if (node.connections.empty())
 			continue;
 
-		special_buildings += "," + node.connections;
+		for (std::string connection : node.connections) {
+            special_buildings += ",";
+            special_buildings += connection;
+		}
 	}
 
 	// handle signs

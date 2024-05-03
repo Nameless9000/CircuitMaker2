@@ -52,7 +52,7 @@ struct SpecialBuildingNode {
 	std::string building_type;
 	NodePosition position;
 	std::vector<float> cframe_rotation_matrix;
-	std::string connections; // todo: make a changeable map
+	std::vector<std::string> connections; // todo: make a changeable map
 };
 
 class SignNode {

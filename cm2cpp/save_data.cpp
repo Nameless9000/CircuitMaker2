@@ -83,17 +83,31 @@ void SaveData::SaveString::import_string(NodeData* node_data) {
 
         SpecialBuildingNode building;
         building.building_type = building_values[0];
-        building.position = {
-            static_cast<short>(std::stoi(building_values[1])),
-            static_cast<short>(std::stoi(building_values[2])),
-            static_cast<short>(std::stoi(building_values[3]))
-        };
 
-        for (int i = 4; i < 13; ++i) {
-            building.cframe_rotation_matrix.push_back(std::stof(building_values[i]));
+        NodePosition position = { 0, 0, 0 };
+
+        if (!building_values[1].empty()) {
+            position.x = static_cast<short>(std::stoi(building_values[1]));
+        }
+        if (!building_values[2].empty()) {
+            position.y = static_cast<short>(std::stoi(building_values[2]));
+        }
+        if (!building_values[3].empty()) {
+            position.z = static_cast<short>(std::stoi(building_values[3]));
+        }
+        building.position = position;
+
+        for (int i = 4; i < 12; ++i) {
+            float value = 0;
+            if (!building_values[i].empty()) {
+                value = std::stof(building_values[i]);
+            }
+            building.cframe_rotation_matrix.push_back(value);
         }
 
-        building.connections = building_values[13];
+        if (building_values.size() > 12) {
+            building.connections = std::vector<std::string>(building_values.begin() + 12, building_values.end());
+        }
 
         node_data->special_buildings.push_back(building);
     }
