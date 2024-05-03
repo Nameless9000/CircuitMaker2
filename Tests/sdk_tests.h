@@ -10,4 +10,5 @@ namespace Tests {
     void sram_test(NodeData* node_data);
     void full_adder_test(NodeData* node_data);
     void text_generation_test(NodeData* node_data);
+    void import_test(NodeData* node_data);
 }

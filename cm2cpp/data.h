@@ -9,5 +9,6 @@ struct NodeData {
 	std::string compile(bool no_debug = false, bool compile_for_speed = false, bool optimize_positions = false, short max_x = 5, short max_z = 5);
 
 	template <NodeTypes T>
-	NodeRef create(NodePosition position = {}, bool dont_optimize = false, bool state = false, std::vector<short> properties = {});
+    NodeRef create(NodePosition position = {}, bool dont_optimize = false, bool state = false, std::vector<short> properties = {});
+    NodeRef create(NodeTypes type, NodePosition position = {}, bool dont_optimize = false, bool state = false, std::vector<short> properties = {});
 };

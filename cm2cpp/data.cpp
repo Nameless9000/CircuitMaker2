@@ -243,6 +243,10 @@ NodeRef NodeData::create(NodePosition position, bool dont_optimize, bool state, 
 	nodes.push_back({ T, state, position, properties, {}, {}, dont_optimize });
 	return NodeRef(this);
 };
+NodeRef NodeData::create(NodeTypes type, NodePosition position, bool dont_optimize, bool state, std::vector<short> properties) {
+    nodes.push_back({ type, state, position, properties, {}, {}, dont_optimize });
+    return NodeRef(this);
+};
 
 // sorry...
 INSTANTIATE_CREATE(NOR);
