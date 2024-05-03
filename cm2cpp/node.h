@@ -52,14 +52,15 @@ struct SpecialBuildingNode {
 	std::string building_type;
 	NodePosition position;
 	std::vector<float> cframe_rotation_matrix;
-	std::map<unsigned char, unsigned int> connections;
+	std::string connections; // todo: make a changeable map
 };
 
-struct SignNode {
-	std::string text;
+class SignNode {
 	std::string hex_data;
+public:
+	std::string text;
 
-	SignNode(std::string data);
+	SignNode(const std::string& hex);
 
 	std::string to_hex();
 };

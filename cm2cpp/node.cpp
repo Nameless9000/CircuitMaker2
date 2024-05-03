@@ -2,6 +2,7 @@
 #include "data.h"
 #include <stdexcept>
 #include <iomanip>
+#include <sstream>
 
 NodeRef::NodeRef() : node_data(0), node_id(-1) {}
 NodeRef::NodeRef(NodeData* node_datax) {
@@ -61,7 +62,20 @@ NodeRef& NodeRef::operator<<(const NodeVec& nodes) {
 	return *this;
 }
 
-SignNode::SignNode(std::string data) : text(data) {}
+SignNode::SignNode(const std::string& hex)
+{
+	hex_data = hex;
+
+	text = "";
+	text.reserve(hex.length() / 2);
+	for (size_t i = 0; i < hex.length(); i += 2) {
+		int byte;
+		std::stringstream ss;
+		ss << std::hex << hex.substr(i, 2);
+		ss >> byte;
+		text.push_back(static_cast<char>(byte));
+	}
+}
 
 std::string SignNode::to_hex()
 {
