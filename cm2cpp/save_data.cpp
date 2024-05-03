@@ -45,13 +45,12 @@ void SaveData::SaveString::import_string(NodeData* node_data) {
             position.z = static_cast<short>(std::stoi(blocks_values[4]));
         }
 
-         if (blocks_values.size() != 6 || blocks_values[5].empty())
-            continue;
-
         std::vector<short> properties;
-        std::stringstream properties_stream(blocks_values[5]);
-        while (std::getline(properties_stream, item, '+')) {
-            properties.push_back(std::stoi(item));
+        if (blocks_values.size() == 6 && !blocks_values[5].empty()) {
+            std::stringstream properties_stream(blocks_values[5]);
+            while (std::getline(properties_stream, item, '+')) {
+                properties.push_back(std::stoi(item));
+            }
         }
 
         blocks.push_back(node_data->create(type, position, false, state, properties));
